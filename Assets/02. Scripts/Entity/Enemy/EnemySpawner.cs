@@ -13,18 +13,20 @@ public class EnemySpawner : ITickable, IDisposable
     private readonly EnemyView _enemyView;
     private readonly EnemyConfig _enemyConfig; // TEST용
     private readonly EnemyRegistry _registry;
-
+    private readonly WaypointPath _waypointPath;
     private ObjectPool<EnemyView> _enemyPool;
+    
 
     private float _spawnTimer;
     private readonly float _spawnInterval = 2f;
 
-    public EnemySpawner(IObjectResolver container, EnemyView enemyView, EnemyConfig enemyConfig, EnemyRegistry registry)
+    public EnemySpawner(IObjectResolver container, EnemyView enemyView, EnemyConfig enemyConfig, EnemyRegistry registry, WaypointPath waypointPath)
     {
         _container = container;
         _enemyView = enemyView;
         _enemyConfig = enemyConfig;
         _registry = registry;
+        _waypointPath = waypointPath;
         
         InitializePool();
     }
@@ -91,8 +93,8 @@ public class EnemySpawner : ITickable, IDisposable
             })
             .AddTo(view);
 
-        List<Vector3> dummyPath = new List<Vector3> { new Vector3(0,0,0), new Vector3(5,0,0), new Vector3(5,5,0), new Vector3(0, 5, 0), new Vector3(0, 0, 0) };
-        presenter.StartMovement(dummyPath);
+        List<Vector3> path = _waypointPath.GetPathPositions();
+        presenter.StartMovement(path);
     }
 
 

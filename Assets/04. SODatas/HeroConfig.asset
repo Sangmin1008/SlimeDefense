@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: HeroConfig
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  AttackPower: 3
+  AttackPower: 20
   AttackRange: 10
   AttackCooldown: 1

@@ -12,6 +12,9 @@ public class InGameLifetimeScope : LifetimeScope
     [SerializeField] private EnemyView enemyViewPrefab;
     [SerializeField] private HeroView heroViewPrefab;
     
+    [Header("Map Data")]
+    [SerializeField] private WaypointPath waypointPath;
+    
     
     protected override void Configure(IContainerBuilder builder)
     {
@@ -23,5 +26,7 @@ public class InGameLifetimeScope : LifetimeScope
         builder.Register<EnemyRegistry>(Lifetime.Scoped);
         builder.RegisterEntryPoint<EnemySpawner>().AsSelf();
         builder.RegisterEntryPoint<GameTest>();
+        
+        builder.RegisterComponent(waypointPath);
     }
 }
