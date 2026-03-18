@@ -10,6 +10,9 @@ public class EnemyModel : IDamageable
     
     private ReactiveProperty<bool> _isDead;
     public IReadOnlyReactiveProperty<bool> IsDead => _isDead;
+    
+    public Subject<Unit> OnEscaped { get; } = new Subject<Unit>();
+    
     public EnemyConfig Config { get; }
 
     public EnemyModel(EnemyConfig config)

@@ -35,7 +35,13 @@ public class EnemySpawner : ITickable, IDisposable
             createFunc: () => UnityEngine.Object.Instantiate(_enemyView),
             actionOnGet: view => view.gameObject.SetActive(true),
             actionOnRelease: view => view.gameObject.SetActive(false),
-            actionOnDestroy: view => UnityEngine.Object.Destroy(view.gameObject),
+            actionOnDestroy: view => 
+            {
+                if (view)
+                {
+                    UnityEngine.Object.Destroy(view.gameObject);
+                }
+            },
             collectionCheck: false,
             defaultCapacity: 20,
             maxSize: 100
@@ -60,7 +66,7 @@ public class EnemySpawner : ITickable, IDisposable
         EnemyPresenter presenter = new EnemyPresenter(model, view);
         presenter.Initialize();
         
-        _registry.Register(model);
+        _registry.Register(model, view);
 
         model.IsDead
             .Where(isDead => isDead)
@@ -69,6 +75,18 @@ public class EnemySpawner : ITickable, IDisposable
                 _registry.Unregister(model);
                 presenter.Dispose();
                 
+                _enemyPool.Release(view);
+            })
+            .AddTo(view);
+        
+        model.OnEscaped
+            .Subscribe(_ => 
+            {
+                _registry.Unregister(model);
+                presenter.Dispose();
+                
+                Debug.Log("적이 탈출함");
+
                 _enemyPool.Release(view);
             })
             .AddTo(view);

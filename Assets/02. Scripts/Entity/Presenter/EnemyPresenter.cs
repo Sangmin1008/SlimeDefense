@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UniRx;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unit = UniRx.Unit;
 
 public class EnemyPresenter : IInitializable, IDisposable
 {
@@ -39,7 +40,7 @@ public class EnemyPresenter : IInitializable, IDisposable
 
     private void HandleReachedDestination()
     {
-        UnityEngine.Object.Destroy(_view.gameObject);
+        _model.OnEscaped.OnNext(Unit.Default);
     }
     
     public void Dispose()

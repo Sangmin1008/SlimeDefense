@@ -248,7 +248,9 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   normalEnemyConfig: {fileID: 11400000, guid: 77e4125ae312d754a895bf728371f8c5, type: 2}
+  heroConfig: {fileID: 11400000, guid: 20b8ea3a3f8b2384a88b188c237ed943, type: 2}
   enemyViewPrefab: {fileID: 6666642329377429992, guid: 126a44aec470a3a43bd9f217516b2629, type: 3}
+  heroViewPrefab: {fileID: 1220689652323866378, guid: 3aaedc53e12c960439ca5c2a9392a7cc, type: 3}
 --- !u!4 &1144128077
 Transform:
   m_ObjectHideFlags: 0
