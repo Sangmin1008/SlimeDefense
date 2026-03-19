@@ -5,25 +5,25 @@ using VContainer.Unity;
 
 public class GameTest : IInitializable
 {
-    private readonly HeroView _prefab;
+    private readonly CommanderView _prefab;
     private readonly EnemyRegistry _registry;
-    private readonly HeroModel _heroModel;
+    private readonly CommanderModel _commanderModel;
 
-    public GameTest(HeroView prefab, EnemyRegistry registry, HeroModel heroModel)
+    public GameTest(CommanderView prefab, EnemyRegistry registry, CommanderModel commanderModel)
     {
         _prefab = prefab;
         _registry = registry;
-        _heroModel = heroModel;
+        _commanderModel = commanderModel;
     }
 
     public void Initialize()
     {
-        HeroView view = Object.Instantiate(_prefab, new Vector3(2.5f, 0, 1.5f), Quaternion.identity);
+        CommanderView view = Object.Instantiate(_prefab, new Vector3(2.5f, 0, 1.5f), Quaternion.identity);
         
         
-        HeroPresenter presenter = new HeroPresenter(_heroModel, view, _registry);
+        CommanderPresenter presenter = new CommanderPresenter(_commanderModel, view, _registry);
         presenter.Initialize();
         
-        Debug.Log("영웅 소환 완료");
+        Debug.Log("지휘관 소환 완료");
     }
 }

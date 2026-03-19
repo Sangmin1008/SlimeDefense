@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "HeroConfig", menuName = "ScriptableObject/HeroConfig")]
-public class HeroConfig : ScriptableObject
+[CreateAssetMenu(fileName = "CommanderConfig", menuName = "ScriptableObject/CommanderConfig")]
+public class CommanderConfig : ScriptableObject
 {
     [Header("Health Settings")]
     public int MaxHealth;

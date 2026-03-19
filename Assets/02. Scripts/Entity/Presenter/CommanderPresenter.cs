@@ -2,19 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
-using Unity.VisualScripting;
+using VContainer.Unity;
 using UnityEngine;
 
-public class HeroPresenter : IInitializable, IDisposable
+public class CommanderPresenter : IInitializable, IDisposable
 {
-    private readonly HeroModel _model;
-    private readonly HeroView _view;
+    private readonly CommanderModel _model;
+    private readonly CommanderView _view;
     private readonly EnemyRegistry _enemyRegistry;
     
     private readonly CompositeDisposable _disposables = new CompositeDisposable();
     private IDisposable _attackTimerDisposable;
     
-    public HeroPresenter(HeroModel model, HeroView view, EnemyRegistry enemyRegistry)
+    public CommanderPresenter(CommanderModel model, CommanderView view, EnemyRegistry enemyRegistry)
     {
         _model = model;
         _view = view;
@@ -60,7 +60,7 @@ public class HeroPresenter : IInitializable, IDisposable
     {
         _attackTimerDisposable?.Dispose();
         UnityEngine.Object.Destroy(_view.gameObject);
-        Debug.Log("Hero 죽음");
+        Debug.Log("지휘관 죽음");
     }
     
     public void Dispose()

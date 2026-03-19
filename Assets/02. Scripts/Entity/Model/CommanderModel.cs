@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
-public class HeroModel : IDamageable
+public class CommanderModel : IDamageable
 {
     private ReactiveProperty<int> _currentHp;
     public IReadOnlyReactiveProperty<int> CurrentHp => _currentHp;
@@ -11,9 +11,9 @@ public class HeroModel : IDamageable
     private ReactiveProperty<bool> _isDead;
     public IReadOnlyReactiveProperty<bool> IsDead => _isDead;
     
-    public HeroConfig Config { get; }
+    public CommanderConfig Config { get; }
 
-    public HeroModel(HeroConfig config)
+    public CommanderModel(CommanderConfig config)
     {
         Config = config;
         _currentHp = new ReactiveProperty<int>(config.MaxHealth);

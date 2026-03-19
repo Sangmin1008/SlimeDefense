@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6019630415179554534}
   - component: {fileID: 1220689652323866378}
   m_Layer: 0
-  m_Name: Hero
+  m_Name: Commander
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,7 +13,7 @@ public class EnemySpawner : IInitializable, IDisposable
 {
     private readonly StageConfig _stageConfig;
     private readonly WaveModel _waveModel;
-    private readonly HeroModel _heroModel;
+    private readonly CommanderModel _commanderModel;
     
     private readonly EnemyView _enemyView;
     private readonly EnemyRegistry _registry;
@@ -24,11 +24,11 @@ public class EnemySpawner : IInitializable, IDisposable
     private CancellationTokenSource _cts;
     
 
-    public EnemySpawner(StageConfig stageConfig, WaveModel waveModel, HeroModel heroModel, EnemyView enemyView, EnemyRegistry registry)
+    public EnemySpawner(StageConfig stageConfig, WaveModel waveModel, CommanderModel commanderModel, EnemyView enemyView, EnemyRegistry registry)
     {
         _stageConfig = stageConfig;
         _waveModel = waveModel;
-        _heroModel = heroModel;
+        _commanderModel = commanderModel;
         
         _enemyView = enemyView;
         _registry = registry;
@@ -118,7 +118,7 @@ public class EnemySpawner : IInitializable, IDisposable
                 presenter.Dispose();
                 _waveModel.AliveEnemiesCount.Value--;
 
-                _heroModel.TakeDamage(enemyConfig.AttackPower);
+                _commanderModel.TakeDamage(enemyConfig.AttackPower);
                 Debug.Log("적이 도달, 체력 감소");
 
                 _enemyPool.Release(view);

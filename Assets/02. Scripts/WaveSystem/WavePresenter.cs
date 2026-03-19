@@ -2,33 +2,34 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
-using Unity.VisualScripting;
 using UnityEngine;
+using VContainer.Unity;
 
 public class WavePresenter : IInitializable, IDisposable
 {
     private readonly StageConfig _stageConfig;
-    private readonly HeroModel _heroModel;
+    private readonly CommanderModel _commanderModel;
     private readonly WaveModel _waveModel;
     
     private CompositeDisposable _disposables = new CompositeDisposable();
 
-    public WavePresenter(StageConfig stageConfig, HeroModel heroModel, WaveModel waveModel)
+    public WavePresenter(StageConfig stageConfig, CommanderModel commanderModel, WaveModel waveModel)
     {
         _stageConfig = stageConfig;
-        _heroModel = heroModel;
+        _commanderModel = commanderModel;
         _waveModel = waveModel;
     }
     
     public void Initialize()
     {
-        _heroModel.IsDead
+        Debug.Log("Initializing WavePresenter");
+        _commanderModel.IsDead
             .Where(x => x && !_waveModel.IsGameOver.Value)
             .Subscribe(_ => HandleDefeat())
             .AddTo(_disposables);
 
         _waveModel.AliveEnemiesCount
-            .Where(count => count == 0 && _waveModel.CurrentWaveIndex.Value >= _stageConfig.Waves.Count &&
+            .Where(count => count == 0 && _waveModel.CurrentWaveIndex.Value >= _stageConfig.Waves.Count - 1 &&
                             !_waveModel.IsGameOver.Value)
             .Subscribe(_ => HandleVictory())
             .AddTo(_disposables);
