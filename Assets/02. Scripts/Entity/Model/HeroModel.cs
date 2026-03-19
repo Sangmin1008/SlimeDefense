@@ -25,6 +25,7 @@ public class HeroModel : IDamageable
         if (_isDead.Value) return;
         
         _currentHp.Value = Mathf.Max(0, _currentHp.Value - damage);
+        Debug.Log("현재 체력: " + _currentHp.Value);
         
         if (_currentHp.Value <= 0)
         {
