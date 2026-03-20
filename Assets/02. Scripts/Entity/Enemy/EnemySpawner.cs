@@ -66,25 +66,45 @@ public class EnemySpawner : IInitializable, IDisposable
     
     private async UniTaskVoid WaveRoutineAsync(CancellationToken cancellationToken)
     {
-        for (int i = 0; i < _stageConfig.Waves.Count; i++)
+        try 
         {
-            if (_waveModel.IsGameOver.Value) return;
-
-            _waveModel.CurrentWaveIndex.Value = i;
-            WaveConfig currentWave = _stageConfig.Waves[i];
-
-            await UniTask.Delay(TimeSpan.FromSeconds(currentWave.DelayTimeBeforeWave), cancellationToken: cancellationToken);
-
-            for (int j = 0; j < currentWave.SpawnCount; j++)
+            for (int i = 0; i < _stageConfig.Waves.Count; i++)
             {
                 if (_waveModel.IsGameOver.Value) return;
-                
-                SpawnEnemy(currentWave.EnemyType, currentWave.PathData);
-                
-                await UniTask.Delay(TimeSpan.FromSeconds(currentWave.SpawnInterval), cancellationToken: cancellationToken);
-            }
 
-            await UniTask.WaitUntil(() => _waveModel.AliveEnemiesCount.Value == 0 || _waveModel.IsGameOver.Value, cancellationToken: cancellationToken);
+                _waveModel.CurrentWaveIndex.Value = i;
+                WaveConfig currentWave = _stageConfig.Waves[i];
+                
+                _waveModel.TotalEnemiesInCurrentWave.Value = currentWave.SpawnCount;
+                _waveModel.AliveEnemiesCount.Value = currentWave.SpawnCount;
+
+                int delaySeconds = Mathf.CeilToInt(currentWave.DelayTimeBeforeWave);
+                for (int time = delaySeconds; time > 0; time--)
+                {
+                    if (_waveModel.IsGameOver.Value) return;
+                    
+                    _waveModel.NextWaveDelayCountdown.Value = time; 
+                    
+                    await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: cancellationToken);
+                }
+                
+                _waveModel.NextWaveDelayCountdown.Value = 0;
+
+                for (int j = 0; j < currentWave.SpawnCount; j++)
+                {
+                    if (_waveModel.IsGameOver.Value) return;
+                    
+                    SpawnEnemy(currentWave.EnemyType, currentWave.PathData);
+                    
+                    await UniTask.Delay(TimeSpan.FromSeconds(currentWave.SpawnInterval), cancellationToken: cancellationToken);
+                }
+
+                await UniTask.WaitUntil(() => _waveModel.AliveEnemiesCount.Value == 0 || _waveModel.IsGameOver.Value, cancellationToken: cancellationToken);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            Debug.Log("게임 오버돼서 스폰 종료");
         }
     }
     
@@ -98,7 +118,6 @@ public class EnemySpawner : IInitializable, IDisposable
         
         _registry.Register(model, view);
 
-        _waveModel.AliveEnemiesCount.Value++;
 
         model.IsDead
             .Where(isDead => isDead)

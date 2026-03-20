@@ -11,11 +11,13 @@ public class InGameLifetimeScope : LifetimeScope
     [SerializeField] private EnemyView enemyViewPrefab;
     [SerializeField] private CommanderView commanderViewPrefab;
     
+    [Header("UI Views")]
+    [SerializeField] private GameUIView gameUIView;
+    
     
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterInstance(stageConfig);
-        
         builder.RegisterInstance(enemyViewPrefab);
         builder.RegisterInstance(commanderViewPrefab);
         
@@ -25,5 +27,7 @@ public class InGameLifetimeScope : LifetimeScope
         builder.Register<EnemyRegistry>(Lifetime.Scoped);
         builder.RegisterEntryPoint<EnemySpawner>().AsSelf();
         builder.RegisterEntryPoint<StageInitializer>();
+        builder.RegisterComponent(gameUIView);
+        builder.RegisterEntryPoint<GameUIPresenter>();
     }
 }

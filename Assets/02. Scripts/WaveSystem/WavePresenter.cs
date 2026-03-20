@@ -37,12 +37,14 @@ public class WavePresenter : IInitializable, IDisposable
 
     private void HandleDefeat()
     {
+        _waveModel.IsDefeat.Value = true;
         _waveModel.IsGameOver.Value = true;
         Debug.Log("게임 오버");
     }
 
     private void HandleVictory()
     {
+        _waveModel.IsVictory.Value = true;
         _waveModel.IsGameOver.Value = true;
         Debug.Log("게임 승리");
     }
