@@ -14,6 +14,9 @@ public class InGameLifetimeScope : LifetimeScope
     [Header("UI Views")]
     [SerializeField] private GameUIView gameUIView;
     
+    [Header("Grid System")]
+    [SerializeField] private GridClickDetector gridClickDetector;
+    
     
     protected override void Configure(IContainerBuilder builder)
     {
@@ -21,13 +24,16 @@ public class InGameLifetimeScope : LifetimeScope
         builder.RegisterInstance(enemyViewPrefab);
         builder.RegisterInstance(commanderViewPrefab);
         
-        builder.RegisterEntryPoint<WavePresenter>();
         builder.Register<WaveModel>(Lifetime.Scoped);
         builder.Register<CommanderModel>(Lifetime.Scoped).WithParameter(stageConfig.CommanderConfig);
         builder.Register<EnemyRegistry>(Lifetime.Scoped);
+        builder.Register<GridManager>(Lifetime.Scoped);
+        builder.RegisterEntryPoint<WavePresenter>();
         builder.RegisterEntryPoint<EnemySpawner>().AsSelf();
         builder.RegisterEntryPoint<StageInitializer>();
-        builder.RegisterComponent(gameUIView);
         builder.RegisterEntryPoint<GameUIPresenter>();
+        builder.RegisterEntryPoint<GridInteractionPresenter>();
+        builder.RegisterComponent(gameUIView);
+        builder.RegisterComponent(gridClickDetector);
     }
 }
