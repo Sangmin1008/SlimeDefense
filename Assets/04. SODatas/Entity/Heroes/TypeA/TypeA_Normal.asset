@@ -19,6 +19,6 @@ MonoBehaviour:
   AttackPower: 5
   AttackRange: 2
   AttackCooldown: 1
-  ProjectilePrefab: {fileID: 5431125734546800831, guid: e87104ff2c28e3847b3a91b6703add25, type: 3}
+  ProjectilePrefab: {fileID: 5431125734546800831, guid: 763c5039682889c49b8d6e2ea103f8c2, type: 3}
   ProjectileSpeed: 4
   ProjectileMaxDistance: 20

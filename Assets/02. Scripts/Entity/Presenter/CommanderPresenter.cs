@@ -25,14 +25,6 @@ public class CommanderPresenter : IInitializable, IDisposable
     
     public void Initialize()
     {
-        _model.CurrentHp
-            .Subscribe(hp => 
-            {
-                float normalizedHp = (float)hp / _model.Config.MaxHealth;
-                _view.UpdateHpBar(normalizedHp);
-            })
-            .AddTo(_disposables);
-
         _model.IsDead
             .Where(isDead => isDead)
             .Subscribe(_ => HandleDeath())
