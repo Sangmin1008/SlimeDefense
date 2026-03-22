@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyConfig
   m_EditorClassIdentifier: 
   EnemyName: Test
-  MoveSpeed: 5
+  MoveSpeed: 3
   AttackPower: 20
-  MaxHealth: 50
+  MaxHealth: 10
   Reward: 5
