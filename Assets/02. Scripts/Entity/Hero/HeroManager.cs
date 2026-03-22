@@ -11,13 +11,15 @@ public class HeroManager
     private readonly GridManager _gridManager;
     private readonly EnemyRegistry _enemyRegistry;
     private readonly CoinModel _coinModel;
+    private readonly ProjectileManager _projectileManager;
     private readonly Dictionary<HeroConfig, ObjectPool<HeroView>> _heroPools = new Dictionary<HeroConfig, ObjectPool<HeroView>>();    
-    public HeroManager(GridManager gridManager, EnemyRegistry enemyRegistry, List<HeroConfig> heroDatabase, CoinModel coinModel)
+    public HeroManager(GridManager gridManager, EnemyRegistry enemyRegistry, List<HeroConfig> heroDatabase, CoinModel coinModel, ProjectileManager projectileManager)
     {
         _gridManager = gridManager;
         _enemyRegistry = enemyRegistry;
         _heroDatabase = heroDatabase;
         _coinModel = coinModel;
+        _projectileManager = projectileManager;
     }
     
     private HeroView GetHeroView(HeroConfig config)
@@ -101,7 +103,7 @@ public class HeroManager
         view.transform.position = worldPos;
 
         HeroModel model = new HeroModel(config, cellPos);
-        HeroPresenter presenter = new HeroPresenter(model, view, _enemyRegistry);
+        HeroPresenter presenter = new HeroPresenter(model, view, _enemyRegistry, _projectileManager);
         presenter.Initialize();
 
         _activeHeroes.Add(presenter);

@@ -24,4 +24,9 @@ public class HeroConfig : ScriptableObject
     public int AttackPower;
     public float AttackRange;
     public float AttackCooldown;
+    
+    [Header("Projectile Settings")]
+    public ProjectileView ProjectilePrefab;
+    public float ProjectileSpeed;
+    public float ProjectileMaxDistance;
 }

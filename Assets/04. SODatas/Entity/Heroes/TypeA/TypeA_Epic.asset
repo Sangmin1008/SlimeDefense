@@ -15,6 +15,9 @@ MonoBehaviour:
   HeroName: TypeA_Epic
   Grade: 2
   Prefab: {fileID: 778670987078804694, guid: 8b944dabe6fa24c4491c03fbd8c0e0c9, type: 3}
-  AttackPower: 3
+  AttackPower: 30
   AttackRange: 3
-  AttackCooldown: 1
+  AttackCooldown: 0.5
+  ProjectilePrefab: {fileID: 5431125734546800831, guid: e87104ff2c28e3847b3a91b6703add25, type: 3}
+  ProjectileSpeed: 5
+  ProjectileMaxDistance: 20
