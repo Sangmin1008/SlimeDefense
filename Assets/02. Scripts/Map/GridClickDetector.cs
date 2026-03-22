@@ -7,6 +7,8 @@ using UnityEngine.Tilemaps;
 
 public class GridClickDetector : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] public Tile NormalGridTile;
+    [SerializeField] public Tile BrokenGridTile;
     private Tilemap _tilemap;
 
     public event Action<Vector3Int, Vector3> OnGridClicked;
@@ -14,7 +16,6 @@ public class GridClickDetector : MonoBehaviour, IPointerClickHandler
     private void Awake()
     {
         _tilemap = GetComponent<Tilemap>();
-        GetComponent<TilemapRenderer>().enabled = false;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -27,5 +28,34 @@ public class GridClickDetector : MonoBehaviour, IPointerClickHandler
             Vector3 centerWorldPos = _tilemap.GetCellCenterWorld(cellPos);
             OnGridClicked?.Invoke(cellPos, centerWorldPos);
         }
+    }
+    
+    public List<Vector3Int> GetBrokenCells()
+    {
+        if (!_tilemap)
+        {
+            _tilemap = GetComponent<Tilemap>();
+        }
+        List<Vector3Int> brokenCells = new List<Vector3Int>();
+        BoundsInt bounds = _tilemap.cellBounds;
+
+        foreach (var pos in bounds.allPositionsWithin)
+        {
+            TileBase tile = _tilemap.GetTile(pos);
+            if (tile == BrokenGridTile)
+            {
+                brokenCells.Add(pos);
+            }
+        }
+        return brokenCells;
+    }
+    
+    public void ChangeToNormalTile(Vector3Int cellPos)
+    {
+        if (!_tilemap)
+        {
+            _tilemap = GetComponent<Tilemap>();
+        }
+        _tilemap.SetTile(cellPos, NormalGridTile);
     }
 }

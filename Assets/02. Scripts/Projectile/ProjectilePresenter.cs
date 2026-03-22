@@ -25,6 +25,11 @@ public class ProjectilePresenter : IInitializable, IDisposable
     
     public void Initialize()
     {
+        if (_model.TargetView != null)
+        {
+            _model.CurrentDirection = (_model.TargetView.transform.position - _view.transform.position).normalized;
+        }
+        
         _view.OnHitEnemy += HandleHitEnemy;
         
         Observable.EveryUpdate()

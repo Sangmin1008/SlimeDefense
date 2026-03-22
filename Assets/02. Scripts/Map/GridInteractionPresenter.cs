@@ -32,6 +32,11 @@ public class GridInteractionPresenter : IInitializable, IDisposable
     {
         _clickDetector.OnGridClicked += HandleGridClicked;
         
+        foreach (var brokenPos in _clickDetector.GetBrokenCells())
+        {
+            _gridManager.RegisterBrokenCell(brokenPos);
+        }
+        
         _uiView.OnSummonClicked
             .Subscribe(_ =>
             {
@@ -51,6 +56,21 @@ public class GridInteractionPresenter : IInitializable, IDisposable
             })
             .AddTo(_disposables);
         
+        _uiView.OnRepairClicked
+            .Subscribe(_ =>
+            {
+                int repairCost = 50;
+                
+                if (_coinModel.TrySpendCoin(repairCost))
+                {
+                    _gridManager.RepairCell(_selectedCellPos);
+                    _clickDetector.ChangeToNormalTile(_selectedCellPos);
+                }
+                
+                _uiView.HideGridPopup();
+            })
+            .AddTo(_disposables);
+        
         _coinModel.CurrentCoin
             .Subscribe(amount => _uiView.UpdateCoin(amount))
             .AddTo(_disposables);
@@ -61,7 +81,12 @@ public class GridInteractionPresenter : IInitializable, IDisposable
         _selectedCellPos = cellPos;
         _selectedWorldPos = worldPos;
 
-        if (_gridManager.IsEmpty(cellPos))
+        if (_gridManager.IsBroken(cellPos))
+        {
+            int cost = 50;
+            _uiView.ShowRepairGridPopup(worldPos, cost);
+        }
+        else if (_gridManager.IsEmpty(cellPos))
         {
             _selectedHero = null;
             int cost = HeroCostHelper.GetCost(HeroGrade.Normal);
