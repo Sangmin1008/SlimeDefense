@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum HeroGrade
 {
-    Normal,
-    Rare,
-    Epic,
-    Legendary
+    Normal = 0,
+    Rare = 1,
+    Epic = 2,
+    Legendary = 3
 }
 
 [CreateAssetMenu(fileName = "HeroConfig", menuName = "ScriptableObject/HeroConfig")]
@@ -24,7 +24,4 @@ public class HeroConfig : ScriptableObject
     public int AttackPower;
     public float AttackRange;
     public float AttackCooldown;
-
-    [Header("Cost")] 
-    public int SummonCost;
 }

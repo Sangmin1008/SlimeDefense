@@ -933,6 +933,8 @@ MonoBehaviour:
   gridPopupContainer: {fileID: 344558120}
   summonButton: {fileID: 1088186841}
   upgradeButton: {fileID: 785141137}
+  needSummonCostText: {fileID: 1091352650}
+  needUpgradeCostText: {fileID: 1593920038}
   coinText: {fileID: 475340334}
   victoryScreen: {fileID: 1262875532}
   defeatScreen: {fileID: 245666146}

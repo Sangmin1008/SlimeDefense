@@ -41,7 +41,7 @@ public class HeroManager
         
         HeroConfig randomConfig = availableHeroes[Random.Range(0, availableHeroes.Count)];
 
-        if (!_coinModel.TrySpendCoin(randomConfig.SummonCost)) return false;
+        if (!_coinModel.TrySpendCoin(HeroCostHelper.GetCost(randomConfig.Grade))) return false;
 
         ForceSpawnHero(randomConfig, cellPos, worldPos);
         return true;
@@ -55,7 +55,7 @@ public class HeroManager
         HeroPresenter materialHero = _activeHeroes.FirstOrDefault(h => h.Model.Config.Grade == currentGrade && h != targetHero);
         if (materialHero == null) return false;
 
-        if (!_coinModel.TrySpendCoin(targetHero.Model.Config.SummonCost)) return false;
+        if (!_coinModel.TrySpendCoin(HeroCostHelper.GetCost(targetHero.Model.Config.Grade))) return false;
         
         Vector3Int upgradeCellPos = targetHero.Model.CellPos;
         Vector3 upgradeWorldPos = targetHero.View.transform.position;

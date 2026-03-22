@@ -18,4 +18,3 @@ MonoBehaviour:
   AttackPower: 3
   AttackRange: 3
   AttackCooldown: 1
-  SummonCost: 20

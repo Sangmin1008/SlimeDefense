@@ -88,7 +88,7 @@ public class GameUIView : MonoBehaviour
         coinText.text = $"{amount}";
     }
     
-    public void ShowGridPopup(Vector3 worldPos, bool isSummon)
+    public void ShowGridPopup(Vector3 worldPos, bool isSummon, int cost)
     {
         if (!gridPopupContainer) return;
 
@@ -99,6 +99,15 @@ public class GameUIView : MonoBehaviour
         
         summonButton.gameObject.SetActive(isSummon);
         upgradeButton.gameObject.SetActive(!isSummon);
+        
+        if (isSummon && needSummonCostText)
+        {
+            needSummonCostText.text = $"{cost}";
+        }
+        else if (!isSummon && needUpgradeCostText)
+        {
+            needUpgradeCostText.text = $"{cost}";
+        }
     }
 
     public void HideGridPopup()

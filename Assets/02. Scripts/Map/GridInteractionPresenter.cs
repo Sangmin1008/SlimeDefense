@@ -64,12 +64,16 @@ public class GridInteractionPresenter : IInitializable, IDisposable
         if (_gridManager.IsEmpty(cellPos))
         {
             _selectedHero = null;
-            _uiView.ShowGridPopup(worldPos, isSummon: true);
+            int cost = HeroCostHelper.GetCost(HeroGrade.Normal);
+            _uiView.ShowGridPopup(worldPos, isSummon: true, cost);
         }
         else
         {
             _selectedHero = _gridManager.GetHero(cellPos);
-            _uiView.ShowGridPopup(worldPos, isSummon: false);
+            if (_selectedHero.Model.Config.Grade == HeroGrade.Legendary) return;
+            
+            int cost = HeroCostHelper.GetCost(_selectedHero.Model.Config.Grade);
+            _uiView.ShowGridPopup(worldPos, isSummon: false, cost);
         }
     }
 
