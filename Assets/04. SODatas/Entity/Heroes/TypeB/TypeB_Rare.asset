@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 136cab67acd1dea40a4aa1f284a36ba5, type: 3}
-  m_Name: TypeA_Epic
+  m_Name: TypeB_Rare
   m_EditorClassIdentifier: 
-  HeroName: TypeA_Epic
-  Grade: 2
-  Type: 0
-  Prefab: {fileID: 778670987078804694, guid: 8b944dabe6fa24c4491c03fbd8c0e0c9, type: 3}
-  AttackPower: 15
-  AttackRange: 3
-  AttackCooldown: 0.7
+  HeroName: TypeB_Rare
+  Grade: 1
+  Type: 1
+  Prefab: {fileID: 778670987078804694, guid: ffdd6543eb537de468c6d1bc4bed3487, type: 3}
+  AttackPower: 10
+  AttackRange: 2
+  AttackCooldown: 1
   ProjectilePrefab: {fileID: 5431125734546800831, guid: e87104ff2c28e3847b3a91b6703add25, type: 3}
-  ProjectileSpeed: 6
+  ProjectileSpeed: 5
   ProjectileMaxDistance: 20

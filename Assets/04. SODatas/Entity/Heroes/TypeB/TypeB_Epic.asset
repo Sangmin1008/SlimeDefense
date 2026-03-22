@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 136cab67acd1dea40a4aa1f284a36ba5, type: 3}
-  m_Name: TypeA_Epic
+  m_Name: TypeB_Epic
   m_EditorClassIdentifier: 
-  HeroName: TypeA_Epic
+  HeroName: TypeB_Epic
   Grade: 2
-  Type: 0
-  Prefab: {fileID: 778670987078804694, guid: 8b944dabe6fa24c4491c03fbd8c0e0c9, type: 3}
+  Type: 1
+  Prefab: {fileID: 778670987078804694, guid: 9ecf5112ceeacf641b345519130ed803, type: 3}
   AttackPower: 15
   AttackRange: 3
   AttackCooldown: 0.7

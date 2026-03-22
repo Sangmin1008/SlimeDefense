@@ -3095,6 +3095,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a88d470456ab7f14fbf24acb90a6323e, type: 2}
   - {fileID: 11400000, guid: 6f8899d4c903d9c48be90ba3c0b4796d, type: 2}
   - {fileID: 11400000, guid: d041d2a87f665704dbaec289359096ff, type: 2}
+  - {fileID: 11400000, guid: 6e7b6a8fbd6be1440b1b6c000a22643b, type: 2}
+  - {fileID: 11400000, guid: 47f320229feaaf145a9b31bdde4313dd, type: 2}
+  - {fileID: 11400000, guid: 0d7abc2df6ffa634b8d16759096bccb7, type: 2}
+  - {fileID: 11400000, guid: 9443d7e709b240e4b946bd4b170c2baf, type: 2}
   enemyViewPrefab: {fileID: 6666642329377429992, guid: 126a44aec470a3a43bd9f217516b2629, type: 3}
   commanderViewPrefab: {fileID: 1220689652323866378, guid: 3aaedc53e12c960439ca5c2a9392a7cc, type: 3}
   gameUIView: {fileID: 178494123}
