@@ -12,5 +12,7 @@ public class EnemyConfig : ScriptableObject
     public float MoveSpeed;
     public int AttackPower;
     public int MaxHealth;
-    
+
+    [Header("Reward")] 
+    public int Reward;
 }

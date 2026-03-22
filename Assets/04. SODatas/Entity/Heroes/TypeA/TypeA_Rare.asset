@@ -15,6 +15,7 @@ MonoBehaviour:
   HeroName: TypeA_Rare
   Grade: 1
   Prefab: {fileID: 778670987078804694, guid: 59e8cf9f51bb437409231c2e03d58caa, type: 3}
-  AttackPower: 1
+  AttackPower: 3
   AttackRange: 3
   AttackCooldown: 1
+  SummonCost: 5

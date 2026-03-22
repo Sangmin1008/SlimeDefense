@@ -10,12 +10,14 @@ public class HeroManager
     private readonly List<HeroConfig> _heroDatabase;
     private readonly GridManager _gridManager;
     private readonly EnemyRegistry _enemyRegistry;
+    private readonly CoinModel _coinModel;
     private readonly Dictionary<HeroConfig, ObjectPool<HeroView>> _heroPools = new Dictionary<HeroConfig, ObjectPool<HeroView>>();    
-    public HeroManager(GridManager gridManager, EnemyRegistry enemyRegistry, List<HeroConfig> heroDatabase)
+    public HeroManager(GridManager gridManager, EnemyRegistry enemyRegistry, List<HeroConfig> heroDatabase, CoinModel coinModel)
     {
         _gridManager = gridManager;
         _enemyRegistry = enemyRegistry;
         _heroDatabase = heroDatabase;
+        _coinModel = coinModel;
     }
     
     private HeroView GetHeroView(HeroConfig config)
@@ -32,29 +34,45 @@ public class HeroManager
         return _heroPools[config].Get();
     }
 
-    public void SpawnHero(HeroGrade grade, Vector3Int cellPos, Vector3 worldPos)
+    public bool TrySpawnHero(HeroGrade grade, Vector3Int cellPos, Vector3 worldPos)
     {
-        Debug.Log("Spawning hero: " + grade);
         List<HeroConfig> availableHeroes = _heroDatabase.Where(h => h.Grade == grade).ToList();
-        if (availableHeroes.Count == 0)
-        {
-            Debug.Log("No heroes available");
-            return;
-        }
+        if (availableHeroes.Count == 0) return false;
         
         HeroConfig randomConfig = availableHeroes[Random.Range(0, availableHeroes.Count)];
 
-        HeroView view = GetHeroView(randomConfig);
-        view.transform.position = worldPos;
+        if (!_coinModel.TrySpendCoin(randomConfig.SummonCost)) return false;
 
-        HeroModel model = new HeroModel(randomConfig, cellPos);
-        HeroPresenter presenter = new HeroPresenter(model, view, _enemyRegistry);
-        presenter.Initialize();
+        ForceSpawnHero(randomConfig, cellPos, worldPos);
+        return true;
+    }
 
-        _activeHeroes.Add(presenter);
-        _gridManager.PlaceHero(cellPos, presenter);
+    public bool TryUpgradeHero(HeroPresenter targetHero)
+    {
+        HeroGrade currentGrade = targetHero.Model.Config.Grade;
+        if (currentGrade == HeroGrade.Legendary) return false;
         
-        Debug.Log($"[{cellPos}] 위치에 {randomConfig.Grade} 등급 {randomConfig.HeroName} 소환 완료!");
+        HeroPresenter materialHero = _activeHeroes.FirstOrDefault(h => h.Model.Config.Grade == currentGrade && h != targetHero);
+        if (materialHero == null) return false;
+
+        if (!_coinModel.TrySpendCoin(targetHero.Model.Config.SummonCost)) return false;
+        
+        Vector3Int upgradeCellPos = targetHero.Model.CellPos;
+        Vector3 upgradeWorldPos = targetHero.View.transform.position;
+        
+        RemoveHero(targetHero);
+        RemoveHero(materialHero);
+        
+        HeroGrade nextGrade = currentGrade + 1;
+        List<HeroConfig> availableHeroes = _heroDatabase.Where(h => h.Grade == nextGrade).ToList();
+        
+        if (availableHeroes.Count > 0)
+        {
+            HeroConfig randomConfig = availableHeroes[Random.Range(0, availableHeroes.Count)];
+            ForceSpawnHero(randomConfig, upgradeCellPos, upgradeWorldPos); 
+        }
+        
+        return true;
     }
 
     public void RemoveHero(HeroPresenter hero)
@@ -77,21 +95,18 @@ public class HeroManager
         }
     }
 
-    public void TryUpgradeHero(HeroPresenter targetHero)
+    private void ForceSpawnHero(HeroConfig config, Vector3Int cellPos, Vector3 worldPos)
     {
-        HeroGrade currentGrade = targetHero.Model.Config.Grade;
-        if (currentGrade == HeroGrade.Legendary) return;
-        
-        HeroPresenter materialHero = _activeHeroes.FirstOrDefault(h => h.Model.Config.Grade == currentGrade && h != targetHero);
-        if (materialHero == null) return;
+        HeroView view = GetHeroView(config);
+        view.transform.position = worldPos;
 
-        Vector3Int upgradeCellPos = targetHero.Model.CellPos;
-        Vector3 upgradeWorldPos = targetHero.View.transform.position;
+        HeroModel model = new HeroModel(config, cellPos);
+        HeroPresenter presenter = new HeroPresenter(model, view, _enemyRegistry);
+        presenter.Initialize();
+
+        _activeHeroes.Add(presenter);
+        _gridManager.PlaceHero(cellPos, presenter);
         
-        RemoveHero(targetHero);
-        RemoveHero(materialHero);
-        
-        HeroGrade nextGrade = currentGrade + 1;
-        SpawnHero(nextGrade, upgradeCellPos, upgradeWorldPos);
+        Debug.Log($"[{cellPos}] 위치에 {config.Grade} 등급 {config.HeroName} 소환 완료!");
     }
 }

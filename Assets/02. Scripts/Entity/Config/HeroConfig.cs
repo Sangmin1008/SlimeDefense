@@ -24,4 +24,7 @@ public class HeroConfig : ScriptableObject
     public int AttackPower;
     public float AttackRange;
     public float AttackCooldown;
+
+    [Header("Cost")] 
+    public int SummonCost;
 }

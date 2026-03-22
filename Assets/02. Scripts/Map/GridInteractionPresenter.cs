@@ -11,6 +11,7 @@ public class GridInteractionPresenter : IInitializable, IDisposable
     private readonly HeroManager _heroManager;
     private readonly GridClickDetector _clickDetector;
     private readonly GameUIView _uiView;
+    private readonly CoinModel _coinModel;
     
     private Vector3Int _selectedCellPos;
     private Vector3 _selectedWorldPos;
@@ -18,12 +19,13 @@ public class GridInteractionPresenter : IInitializable, IDisposable
     private CompositeDisposable _disposables = new CompositeDisposable();
     
 
-    public GridInteractionPresenter(GridManager gridManager, GridClickDetector clickDetector, GameUIView uiView, HeroManager heroManager)
+    public GridInteractionPresenter(GridManager gridManager, GridClickDetector clickDetector, GameUIView uiView, HeroManager heroManager, CoinModel coinModel)
     {
         _gridManager = gridManager;
         _clickDetector = clickDetector;
         _uiView = uiView;
         _heroManager = heroManager;
+        _coinModel = coinModel;
     }
     
     public void Initialize()
@@ -33,7 +35,7 @@ public class GridInteractionPresenter : IInitializable, IDisposable
         _uiView.OnSummonClicked
             .Subscribe(_ =>
             {
-                _heroManager.SpawnHero(HeroGrade.Normal, _selectedCellPos, _selectedWorldPos);
+                _heroManager.TrySpawnHero(HeroGrade.Normal, _selectedCellPos, _selectedWorldPos);
                 _uiView.HideGridPopup();
             })
             .AddTo(_disposables);
@@ -47,6 +49,10 @@ public class GridInteractionPresenter : IInitializable, IDisposable
                 }
                 _uiView.HideGridPopup();
             })
+            .AddTo(_disposables);
+        
+        _coinModel.CurrentCoin
+            .Subscribe(amount => _uiView.UpdateCoin(amount))
             .AddTo(_disposables);
     }
 

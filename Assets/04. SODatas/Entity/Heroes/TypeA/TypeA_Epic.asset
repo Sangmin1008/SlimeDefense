@@ -15,6 +15,7 @@ MonoBehaviour:
   HeroName: TypeA_Epic
   Grade: 2
   Prefab: {fileID: 778670987078804694, guid: 8b944dabe6fa24c4491c03fbd8c0e0c9, type: 3}
-  AttackPower: 1
+  AttackPower: 3
   AttackRange: 3
   AttackCooldown: 1
+  SummonCost: 10

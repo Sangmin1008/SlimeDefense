@@ -15,6 +15,7 @@ MonoBehaviour:
   HeroName: TypeA_Legendary
   Grade: 3
   Prefab: {fileID: 778670987078804694, guid: 3c1b3acc2334b77488bb2a8ccbcf8d64, type: 3}
-  AttackPower: 1
+  AttackPower: 3
   AttackRange: 3
   AttackCooldown: 1
+  SummonCost: 20

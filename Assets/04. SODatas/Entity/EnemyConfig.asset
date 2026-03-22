@@ -16,3 +16,4 @@ MonoBehaviour:
   MoveSpeed: 5
   AttackPower: 20
   MaxHealth: 10
+  Reward: 5

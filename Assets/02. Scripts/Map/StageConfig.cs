@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StageConfig", menuName = "ScriptableObject/StageConfig")]
 public class StageConfig : ScriptableObject
 {
+    [Header("Economy Settings")]
+    public int InitialCoin;
+    
     [Header("Commander Settings")]
     public CommanderConfig CommanderConfig;
     public Vector3 CommanderPosition;

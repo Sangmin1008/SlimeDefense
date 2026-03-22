@@ -17,6 +17,7 @@ public class EnemySpawner : IInitializable, IDisposable
     
     private readonly EnemyView _enemyView;
     private readonly EnemyRegistry _registry;
+    private readonly CoinModel _coinModel;
     
     private ObjectPool<EnemyView> _enemyPool;
     private CompositeDisposable _disposables = new CompositeDisposable();
@@ -24,7 +25,7 @@ public class EnemySpawner : IInitializable, IDisposable
     private CancellationTokenSource _cts;
     
 
-    public EnemySpawner(StageConfig stageConfig, WaveModel waveModel, CommanderModel commanderModel, EnemyView enemyView, EnemyRegistry registry)
+    public EnemySpawner(StageConfig stageConfig, WaveModel waveModel, CommanderModel commanderModel, EnemyView enemyView, EnemyRegistry registry, CoinModel coinModel)
     {
         _stageConfig = stageConfig;
         _waveModel = waveModel;
@@ -32,6 +33,7 @@ public class EnemySpawner : IInitializable, IDisposable
         
         _enemyView = enemyView;
         _registry = registry;
+        _coinModel = coinModel;
         
         InitializePool();
     }
@@ -126,6 +128,7 @@ public class EnemySpawner : IInitializable, IDisposable
                 _registry.Unregister(model);
                 presenter.Dispose();
                 _waveModel.AliveEnemiesCount.Value--;
+                _coinModel.AddCoin(enemyConfig.Reward);
                 _enemyPool.Release(view);
             })
             .AddTo(view);

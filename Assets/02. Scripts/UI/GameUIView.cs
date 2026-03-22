@@ -22,6 +22,11 @@ public class GameUIView : MonoBehaviour
     [SerializeField] private RectTransform gridPopupContainer; 
     [SerializeField] private Button summonButton;
     [SerializeField] private Button upgradeButton;
+    [SerializeField] private TextMeshProUGUI needSummonCostText;
+    [SerializeField] private TextMeshProUGUI needUpgradeCostText;
+    
+    [Header("Coin UI")]
+    [SerializeField] private TextMeshProUGUI coinText;
 
     [Header("Result Screens")]
     [SerializeField] private GameObject victoryScreen;
@@ -75,6 +80,12 @@ public class GameUIView : MonoBehaviour
         {
             waveDelayText.gameObject.SetActive(false);
         }
+    }
+
+    public void UpdateCoin(int amount)
+    {
+        if (!coinText) return;
+        coinText.text = $"{amount}";
     }
     
     public void ShowGridPopup(Vector3 worldPos, bool isSummon)
