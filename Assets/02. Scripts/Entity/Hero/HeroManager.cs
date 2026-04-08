@@ -12,7 +12,10 @@ public class HeroManager
     private readonly EnemyRegistry _enemyRegistry;
     private readonly CoinModel _coinModel;
     private readonly ProjectileManager _projectileManager;
-    private readonly Dictionary<HeroConfig, ObjectPool<HeroView>> _heroPools = new Dictionary<HeroConfig, ObjectPool<HeroView>>();    
+    private readonly Dictionary<HeroConfig, ObjectPool<HeroView>> _heroPools = new Dictionary<HeroConfig, ObjectPool<HeroView>>();
+
+    private const float _offset = 0.3f; 
+    
     public HeroManager(GridManager gridManager, EnemyRegistry enemyRegistry, List<HeroConfig> heroDatabase, CoinModel coinModel, ProjectileManager projectileManager)
     {
         _gridManager = gridManager;
@@ -44,6 +47,8 @@ public class HeroManager
         HeroConfig randomConfig = availableHeroes[Random.Range(0, availableHeroes.Count)];
 
         if (!_coinModel.TrySpendCoin(HeroCostHelper.GetCost(randomConfig.Grade))) return false;
+
+        worldPos.y += _offset;
 
         ForceSpawnHero(randomConfig, cellPos, worldPos);
         return true;
