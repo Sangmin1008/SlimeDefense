@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1dc2339ecd0b549b744c09011029b3, type: 3}
+  m_Name: StageConfig
+  m_EditorClassIdentifier: 
+  TileMapPrefab: {fileID: 3493784618943124187, guid: 58b85d84c5248904ab980e20e58b26e2,
+    type: 3}
+  InitialCoin: 100
+  CommanderConfig: {fileID: 11400000, guid: 529a7f3092cd28347bd53284cd4b4cec, type: 2}
+  CommanderPosition: {x: 1.177, y: 3.295, z: 0}
+  Waves:
+  - {fileID: 11400000, guid: 7643a5c96d5c71742a22d5ec29bd992b, type: 2}
+  - {fileID: 11400000, guid: aa4b4c6105cafd346b8279c1b6b2fd78, type: 2}
+  - {fileID: 11400000, guid: c88e440d248e779448252e793f3f4b93, type: 2}
