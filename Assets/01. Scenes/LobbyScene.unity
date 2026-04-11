@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 879490443}
   - component: {fileID: 879490445}
   - component: {fileID: 879490444}
+  - component: {fileID: 879490446}
   m_Layer: 5
   m_Name: Logo
   m_TagString: Untagged
@@ -398,6 +399,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 879490442}
   m_CullTransparentMesh: 1
+--- !u!114 &879490446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879490442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e12c860df1bc3418177199f8e7315b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleSpeed: 1.2
+  maxScale: 1.1
+  minScale: 0.95
 --- !u!1 &983797903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,6 +1047,7 @@ GameObject:
   - component: {fileID: 1695969472}
   - component: {fileID: 1695969471}
   - component: {fileID: 1695969470}
+  - component: {fileID: 1695969473}
   m_Layer: 5
   m_Name: Button - Stage1
   m_TagString: Untagged
@@ -1140,6 +1157,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695969468}
   m_CullTransparentMesh: 1
+--- !u!114 &1695969473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695969468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9fe6c0308b27b489a0719a3351b1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.1
+  targetScale: {x: 0.95, y: 0.95}
+  easeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1866128753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,6 +1207,7 @@ GameObject:
   - component: {fileID: 1866128757}
   - component: {fileID: 1866128756}
   - component: {fileID: 1866128755}
+  - component: {fileID: 1866128758}
   m_Layer: 5
   m_Name: Button - Stage2
   m_TagString: Untagged
@@ -1261,6 +1317,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866128753}
   m_CullTransparentMesh: 1
+--- !u!114 &1866128758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866128753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9fe6c0308b27b489a0719a3351b1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.1
+  targetScale: {x: 0.95, y: 0.95}
+  easeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1980686731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1367,7 @@ GameObject:
   - component: {fileID: 1980686735}
   - component: {fileID: 1980686734}
   - component: {fileID: 1980686733}
+  - component: {fileID: 1980686736}
   m_Layer: 5
   m_Name: Button - Stage3
   m_TagString: Untagged
@@ -1382,6 +1477,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980686731}
   m_CullTransparentMesh: 1
+--- !u!114 &1980686736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980686731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9fe6c0308b27b489a0719a3351b1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.1
+  targetScale: {x: 0.95, y: 0.95}
+  easeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
