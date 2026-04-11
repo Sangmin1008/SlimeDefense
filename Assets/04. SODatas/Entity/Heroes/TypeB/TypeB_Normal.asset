@@ -15,10 +15,11 @@ MonoBehaviour:
   HeroName: TypeB_Normal
   Grade: 0
   Type: 1
-  Prefab: {fileID: 778670987078804694, guid: cbae8c724c1995d4fab287b5e6041156, type: 3}
+  Prefab: {fileID: 2227767714956279065, guid: cbae8c724c1995d4fab287b5e6041156, type: 3}
   AttackPower: 5
   AttackRange: 2
   AttackCooldown: 1
-  ProjectilePrefab: {fileID: 5431125734546800831, guid: 8055d5bb75db4774b9db0dda87bf63b1, type: 3}
+  ProjectilePrefab: {fileID: 6060088839701561667, guid: 8055d5bb75db4774b9db0dda87bf63b1,
+    type: 3}
   ProjectileSpeed: 4
   ProjectileMaxDistance: 20

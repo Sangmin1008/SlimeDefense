@@ -15,10 +15,11 @@ MonoBehaviour:
   HeroName: TypeB_Legendary
   Grade: 3
   Type: 1
-  Prefab: {fileID: 778670987078804694, guid: 30cc7f68df77c894cb1a79144a78dacd, type: 3}
+  Prefab: {fileID: 2227767714956279065, guid: 30cc7f68df77c894cb1a79144a78dacd, type: 3}
   AttackPower: 30
   AttackRange: 3
   AttackCooldown: 1
-  ProjectilePrefab: {fileID: 5431125734546800831, guid: 59f9540bcb6fb3e4f9a214c56940c3b5, type: 3}
+  ProjectilePrefab: {fileID: 6060088839701561667, guid: 59f9540bcb6fb3e4f9a214c56940c3b5,
+    type: 3}
   ProjectileSpeed: 8
   ProjectileMaxDistance: 20

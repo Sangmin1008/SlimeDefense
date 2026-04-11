@@ -15,7 +15,7 @@ SpriteAtlas:
       compressionQuality: 50
       maxTextureSize: 2048
       textureCompression: 0
-      filterMode: 1
+      filterMode: 0
       generateMipMaps: 0
       readable: 0
       crunchedCompression: 0
@@ -36,11 +36,11 @@ SpriteAtlas:
       m_ForceMaximumCompressionQuality_BC6H_BC7: 0
     packingSettings:
       serializedVersion: 2
-      padding: 4
+      padding: 8
       blockOffset: 1
       allowAlphaSplitting: 0
-      enableRotation: 1
-      enableTightPacking: 1
+      enableRotation: 0
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
@@ -48,9 +48,9 @@ SpriteAtlas:
     - {fileID: 2800000, guid: c1b63dd4d7f26b44b9be74e0536c6429, type: 3}
     - {fileID: 1155638775, guid: abe7a2dc8e032464c819a0fb1881dded, type: 3}
     - {fileID: 2015921406, guid: abe7a2dc8e032464c819a0fb1881dded, type: 3}
-    - {fileID: 2800000, guid: d4fd36500f76a9649b05fc7dfb431d63, type: 3}
     - {fileID: 2800000, guid: 661205988855c9b4d9d68d92ab8ccb18, type: 3}
     - {fileID: 21300024, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+    - {fileID: 2800000, guid: d4fd36500f76a9649b05fc7dfb431d63, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
