@@ -50,6 +50,7 @@ SpriteAtlas:
     - {fileID: 2015921406, guid: abe7a2dc8e032464c819a0fb1881dded, type: 3}
     - {fileID: 2800000, guid: d4fd36500f76a9649b05fc7dfb431d63, type: 3}
     - {fileID: 2800000, guid: 661205988855c9b4d9d68d92ab8ccb18, type: 3}
+    - {fileID: 21300024, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -57,6 +58,7 @@ SpriteAtlas:
     - d4fd36500f76a9649b05fc7dfb431d63: 21300000
     - c1b63dd4d7f26b44b9be74e0536c6429: -1272797599
     - c1b63dd4d7f26b44b9be74e0536c6429: 1228891746
+    - 1eaee135ce037439d925cee5e41ce026: 21300024
     - 661205988855c9b4d9d68d92ab8ccb18: 1698730979
     - 661205988855c9b4d9d68d92ab8ccb18: -1889656072
     - abe7a2dc8e032464c819a0fb1881dded: 1155638775
@@ -66,6 +68,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d4fd36500f76a9649b05fc7dfb431d63, type: 3}
   - {fileID: -1272797599, guid: c1b63dd4d7f26b44b9be74e0536c6429, type: 3}
   - {fileID: 1228891746, guid: c1b63dd4d7f26b44b9be74e0536c6429, type: 3}
+  - {fileID: 21300024, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
   - {fileID: 1698730979, guid: 661205988855c9b4d9d68d92ab8ccb18, type: 3}
   - {fileID: -1889656072, guid: 661205988855c9b4d9d68d92ab8ccb18, type: 3}
   - {fileID: 1155638775, guid: abe7a2dc8e032464c819a0fb1881dded, type: 3}
@@ -74,6 +77,7 @@ SpriteAtlas:
   - Panel
   - HPBar_1
   - HPBar_0
+  - GUI_12
   - Buttons_1
   - Buttons_0
   - Coin_Status_0
