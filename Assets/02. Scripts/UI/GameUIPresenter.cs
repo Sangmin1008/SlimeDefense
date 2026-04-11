@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
 public class GameUIPresenter : IInitializable, IDisposable
@@ -11,15 +12,17 @@ public class GameUIPresenter : IInitializable, IDisposable
     private readonly WaveModel _waveModel;
     private readonly CommanderModel _commanderModel;
     private readonly GameUIView _uiView;
+    private readonly GameManagerModel _gameManagerModel;
     
     private CompositeDisposable _disposables = new CompositeDisposable();
 
-    public GameUIPresenter(StageConfig stageConfig, WaveModel waveModel, CommanderModel commanderModel, GameUIView uiView)
+    public GameUIPresenter(StageConfig stageConfig, WaveModel waveModel, CommanderModel commanderModel, GameUIView uiView, GameManagerModel gameManagerModel)
     {
         _stageConfig = stageConfig;
         _waveModel = waveModel;
         _commanderModel = commanderModel;
         _uiView = uiView;
+        _gameManagerModel = gameManagerModel;
     }
     
     public void Initialize()
@@ -52,6 +55,33 @@ public class GameUIPresenter : IInitializable, IDisposable
         _waveModel.IsVictory
             .Where(isVictory => isVictory)
             .Subscribe(_ => _uiView.ShowVictoryScreen())
+            .AddTo(_disposables);
+        
+        _uiView.OnRetryClicked
+            .Subscribe(_ =>
+            {
+                Debug.Log("스테이지 재시작!");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+            })
+            .AddTo(_disposables);
+
+        _uiView.OnNextClicked
+            .Subscribe(_ =>
+            {
+                Debug.Log("다음 스테이지!");
+                
+                
+
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            })
+            .AddTo(_disposables);
+
+        _uiView.OnExitClicked
+            .Subscribe(_ =>
+            {
+                Debug.Log("로비로 돌아가기!");
+                SceneManager.LoadScene("01. Scenes/LobbyScene");
+            })
             .AddTo(_disposables);
     }
     

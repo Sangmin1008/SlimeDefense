@@ -41,6 +41,10 @@ public class GameUIView : MonoBehaviour
     public IObservable<Unit> OnSummonClicked => summonButton.onClick.AsObservable();
     public IObservable<Unit> OnUpgradeClicked => upgradeButton.onClick.AsObservable();
     public IObservable<Unit> OnRepairClicked => repairButton.onClick.AsObservable();
+    
+    public IObservable<Unit> OnRetryClicked => retryButton.onClick.AsObservable();
+    public IObservable<Unit> OnNextClicked => nextButton.onClick.AsObservable();
+    public IObservable<Unit> OnExitClicked => exitButton.onClick.AsObservable();
 
     private void Awake()
     {

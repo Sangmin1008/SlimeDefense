@@ -33,6 +33,7 @@ public class ProjectilePresenter : IInitializable, IDisposable
         _view.OnHitEnemy += HandleHitEnemy;
         
         Observable.EveryUpdate()
+            .TakeUntilDestroy(_view)
             .Subscribe(_ => UpdateMovement())
             .AddTo(_disposables);
     }
@@ -72,7 +73,7 @@ public class ProjectilePresenter : IInitializable, IDisposable
 
     public void Dispose()
     {
-        _view.OnHitEnemy -= HandleHitEnemy;
+        if (_view != null) _view.OnHitEnemy -= HandleHitEnemy;
         _disposables.Dispose();
     }
 }

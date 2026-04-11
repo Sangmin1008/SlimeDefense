@@ -30,6 +30,7 @@ public class HeroPresenter : IInitializable, IDisposable
     public void Initialize()
     {
         Observable.Interval(TimeSpan.FromSeconds(_model.Config.AttackCooldown))
+            .TakeUntilDestroy(_view)
             .Subscribe(_ => TryAttack())
             .AddTo(_disposables);
     }
