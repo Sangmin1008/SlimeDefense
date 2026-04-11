@@ -1,0 +1,20 @@
+{
+    "name": "SlimeDefense.Scopes",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2368ff6da08a78e4fb4e6d75317d4e2d",
+        "GUID:9a27a920714b00a438cc27aea63d000f",
+        "GUID:d4c70f78aeaf5c94ba962a68765fc955",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
