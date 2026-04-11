@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 649842de7ab2d104fad8407b477ececc, type: 3}
-  m_Name: CommanderConfig
+  m_Name: CommanderConfig 1
   m_EditorClassIdentifier: 
   MaxHealth: 200
   AttackPower: 3
   AttackRange: 4
   AttackCooldown: 1
-  ProjectilePrefab: {fileID: 5431125734546800831, guid: e87104ff2c28e3847b3a91b6703add25, type: 3}
+  ProjectilePrefab: {fileID: 5431125734546800831, guid: e87104ff2c28e3847b3a91b6703add25,
+    type: 3}
   ProjectileSpeed: 6
   ProjectileMaxDistance: 20

@@ -15,7 +15,7 @@ MonoBehaviour:
   TileMapPrefab: {fileID: 3493784618943124187, guid: 847584bff9d95824aa522790c55d6cc2,
     type: 3}
   InitialCoin: 100
-  CommanderConfig: {fileID: 11400000, guid: 529a7f3092cd28347bd53284cd4b4cec, type: 2}
+  CommanderConfig: {fileID: 11400000, guid: b8d23d5aa720cde4e855a9553222d9d4, type: 2}
   CommanderPosition: {x: 0.02, y: 0.96, z: 0}
   Waves:
   - {fileID: 11400000, guid: 951294c6b9a238f4ea3199e8e7bc945b, type: 2}
