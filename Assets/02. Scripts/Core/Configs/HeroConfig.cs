@@ -12,7 +12,7 @@ public enum HeroGrade
 
 public enum HeroType
 {
-    TypaA,
+    TypeA,
     TypeB,
 }
 
