@@ -19,7 +19,7 @@ public class EnemySpawner : IInitializable, IDisposable
     private readonly EnemyRegistry _registry;
     private readonly CoinModel _coinModel;
     
-    private ObjectPool<EnemyView> _enemyPool;
+    private ObjectPool<EnemyPresenter> _enemyPool;
     private CompositeDisposable _disposables = new CompositeDisposable();
     
     private CancellationTokenSource _cts;
@@ -40,24 +40,49 @@ public class EnemySpawner : IInitializable, IDisposable
 
     private void InitializePool()
     {
-        _enemyPool = new ObjectPool<EnemyView>(
-            createFunc: () => UnityEngine.Object.Instantiate(_enemyView),
-            actionOnGet: view => view.gameObject.SetActive(true),
-            actionOnRelease: view => view.gameObject.SetActive(false),
-            actionOnDestroy: view => 
+        _enemyPool = new ObjectPool<EnemyPresenter>(
+            createFunc: () => CreatePresenter(),
+            actionOnGet: p => p.View.gameObject.SetActive(true),
+            actionOnRelease: p => 
             {
-                if (view)
-                {
-                    UnityEngine.Object.Destroy(view.gameObject);
-                }
+                p.View.gameObject.SetActive(false);
+                p.Release();
+                _registry.Unregister(p.Model);
+            },
+            actionOnDestroy: p => 
+            {
+                p.Dispose();
+                if (p.View) UnityEngine.Object.Destroy(p.View.gameObject);
             },
             collectionCheck: false,
             defaultCapacity: 20,
             maxSize: 100
         );
     }
-    
-    
+
+    private EnemyPresenter CreatePresenter()
+    {
+        EnemyView view = UnityEngine.Object.Instantiate(_enemyView);
+        EnemyModel model = new EnemyModel();
+        EnemyPresenter presenter = new EnemyPresenter(model, view);
+
+        presenter.OnDeath += p => 
+        {
+            _waveModel.AliveEnemiesCount.Value--;
+            _coinModel.AddCoin(p.Model.Config.Reward);
+            _enemyPool.Release(p);
+        };
+
+        presenter.OnEscapedEvent += (p) =>
+        {
+            _waveModel.AliveEnemiesCount.Value--;
+            _commanderModel.TakeDamage(p.Model.Config.AttackPower);
+            Debug.Log("적이 도달, 체력 감소");
+            _enemyPool.Release(p);
+        };
+
+        return presenter;
+    }
     
     public void Initialize()
     {
@@ -113,46 +138,18 @@ public class EnemySpawner : IInitializable, IDisposable
     
     private void SpawnEnemy(EnemyConfig enemyConfig, PathDataSO pathData)
     {
-        EnemyView view = _enemyPool.Get();
-        EnemyModel model = new EnemyModel(enemyConfig);
-        EnemyPresenter presenter = new EnemyPresenter(model, view);
-        presenter.Initialize();
+        EnemyPresenter presenter = _enemyPool.Get();
         
-        _registry.Register(model, view);
+        _registry.Register(presenter.Model, presenter.View);
 
-
-        model.IsDead
-            .Where(isDead => isDead)
-            .Subscribe(_ => 
-            {
-                _registry.Unregister(model);
-                presenter.Dispose();
-                _waveModel.AliveEnemiesCount.Value--;
-                _coinModel.AddCoin(enemyConfig.Reward);
-                _enemyPool.Release(view);
-            })
-            .AddTo(view);
-        
-        model.OnEscaped
-            .Subscribe(_ => 
-            {
-                _registry.Unregister(model);
-                presenter.Dispose();
-                _waveModel.AliveEnemiesCount.Value--;
-
-                _commanderModel.TakeDamage(enemyConfig.AttackPower);
-                Debug.Log("적이 도달, 체력 감소");
-
-                _enemyPool.Release(view);
-            })
-            .AddTo(view);
-
-        presenter.StartMovement(pathData.PathPositions);
+        presenter.ResetAndStart(enemyConfig, pathData.PathPositions);
     }
 
 
     public void Dispose()
     {
+        _cts?.Cancel();
+        _cts?.Dispose();
         _disposables.Dispose();
         _enemyPool?.Dispose();
     }

@@ -11,6 +11,12 @@ public class EnemyPresenter : IInitializable, IDisposable
     private readonly EnemyModel _model;
     private readonly EnemyView _view;
     private readonly CompositeDisposable _disposables = new CompositeDisposable();
+    
+    public event Action<EnemyPresenter> OnDeath;
+    public event Action<EnemyPresenter> OnEscapedEvent;
+    
+    public EnemyView View => _view;
+    public EnemyModel Model => _model;
 
     public EnemyPresenter(EnemyModel model, EnemyView view)
     {
@@ -18,8 +24,13 @@ public class EnemyPresenter : IInitializable, IDisposable
         _view = view;
     }
     
-    public void Initialize()
+    public void Initialize() { }
+    
+    public void ResetAndStart(EnemyConfig config, List<Vector3> waypoints)
     {
+        _model.ResetData(config);
+        _view.SetupMovement(waypoints, config.MoveSpeed);
+
         _model.CurrentHp
             .Subscribe(hp =>
             {
@@ -31,20 +42,32 @@ public class EnemyPresenter : IInitializable, IDisposable
         _view.OnReachedDestination
             .Subscribe(_ => HandleReachedDestination())
             .AddTo(_disposables);
+
+        _model.IsDead
+            .Where(isDead => isDead)
+            .Subscribe(_ => HandleDeath())
+            .AddTo(_disposables);
     }
 
-    public void StartMovement(List<Vector3> waypoints)
+    private void HandleDeath()
     {
-        _view.SetupMovement(waypoints, _model.Config.MoveSpeed);
+        OnDeath?.Invoke(this);
     }
 
     private void HandleReachedDestination()
     {
         _model.OnEscaped.OnNext(Unit.Default);
+        OnEscapedEvent?.Invoke(this);
     }
     
+    public void Release()
+    {
+        _disposables.Clear();
+    }
+
     public void Dispose()
     {
+        Release();
         _disposables.Dispose();
     }
 }

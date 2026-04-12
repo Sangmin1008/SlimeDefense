@@ -13,14 +13,19 @@ public class EnemyModel : IDamageable
     
     public Subject<Unit> OnEscaped { get; } = new Subject<Unit>();
     
-    public EnemyConfig Config { get; }
+    public EnemyConfig Config { get; private set; }
 
-    public EnemyModel(EnemyConfig config)
+    public EnemyModel()
     {
-        Config = config;
-        
-        _currentHp = new ReactiveProperty<int>(config.MaxHealth);
+        _currentHp = new ReactiveProperty<int>(0);
         _isDead = new ReactiveProperty<bool>(false);
+    }
+    
+    public void ResetData(EnemyConfig newConfig)
+    {
+        Config = newConfig;
+        _currentHp.Value = newConfig.MaxHealth;
+        _isDead.Value = false;
     }
     
     public void TakeDamage(int damage)
