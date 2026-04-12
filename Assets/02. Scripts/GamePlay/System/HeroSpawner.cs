@@ -11,18 +11,18 @@ public class HeroSpawner
     private readonly GridModel _gridModel;
     private readonly EnemyRegistry _enemyRegistry;
     private readonly CoinModel _coinModel;
-    private readonly ProjectileManager _projectileManager;
+    private readonly ProjectileSpawner _projectileSpawner;
     private readonly Dictionary<HeroConfig, ObjectPool<HeroView>> _heroPools = new Dictionary<HeroConfig, ObjectPool<HeroView>>();
 
     private const float _offset = 0.3f; 
     
-    public HeroSpawner(GridModel gridModel, EnemyRegistry enemyRegistry, List<HeroConfig> heroDatabase, CoinModel coinModel, ProjectileManager projectileManager)
+    public HeroSpawner(GridModel gridModel, EnemyRegistry enemyRegistry, List<HeroConfig> heroDatabase, CoinModel coinModel, ProjectileSpawner projectileSpawner)
     {
         _gridModel = gridModel;
         _enemyRegistry = enemyRegistry;
         _heroDatabase = heroDatabase;
         _coinModel = coinModel;
-        _projectileManager = projectileManager;
+        _projectileSpawner = projectileSpawner;
     }
     
     private HeroView GetHeroView(HeroConfig config)
@@ -118,7 +118,7 @@ public class HeroSpawner
         view.transform.position = worldPos;
 
         HeroModel model = new HeroModel(config, cellPos);
-        HeroPresenter presenter = new HeroPresenter(model, view, _enemyRegistry, _projectileManager);
+        HeroPresenter presenter = new HeroPresenter(model, view, _enemyRegistry, _projectileSpawner);
         presenter.Initialize();
 
         _activeHeroes.Add(model, presenter);

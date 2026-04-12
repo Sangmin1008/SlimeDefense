@@ -23,8 +23,13 @@ public class ProjectilePresenter : IInitializable, IDisposable
         _registry = registry;
     }
     
-    public void Initialize()
+    public void Initialize() { }
+    
+    public void ResetDataAndFire(Vector3 startPos, int damage, float speed, float maxDist, EnemyModel targetModel, GameObject targetObj)
     {
+        _view.transform.position = startPos;
+        _model.UpdateData(damage, speed, maxDist, targetModel, targetObj);
+
         if (_model.TargetView != null)
         {
             _model.CurrentDirection = (_model.TargetView.transform.position - _view.transform.position).normalized;
@@ -68,7 +73,12 @@ public class ProjectilePresenter : IInitializable, IDisposable
     private void Complete()
     {
         OnComplete?.Invoke(this);
-        Dispose();
+    }
+    
+    public void Release()
+    {
+        if (_view != null) _view.OnHitEnemy -= HandleHitEnemy;
+        _disposables.Clear();
     }
 
     public void Dispose()

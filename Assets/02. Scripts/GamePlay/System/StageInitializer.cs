@@ -10,7 +10,7 @@ public class StageInitializer : IInitializable, IDisposable
     private readonly CommanderView _commanderView;
     private readonly CommanderModel _commanderModel;
     private readonly EnemyRegistry _registry;
-    private readonly ProjectileManager _projectileManager;
+    private readonly ProjectileSpawner _projectileSpawner;
     private readonly GridModel _gridModel;
     private readonly HeroSpawner _heroSpawner;
     private readonly GameUIView _gameUIView;
@@ -22,14 +22,14 @@ public class StageInitializer : IInitializable, IDisposable
 
     public StageInitializer(
         StageConfig stageConfig, CommanderView commanderView, CommanderModel commanderModel, 
-        EnemyRegistry registry, ProjectileManager projectileManager,
+        EnemyRegistry registry, ProjectileSpawner projectileSpawner,
         GridModel gridModel, HeroSpawner heroSpawner, GameUIView gameUIView, CoinModel coinModel)
     {
         _stageConfig = stageConfig;
         _commanderView = commanderView;
         _commanderModel = commanderModel;
         _registry = registry;
-        _projectileManager = projectileManager;
+        _projectileSpawner = projectileSpawner;
         
         _gridModel = gridModel;
         _heroSpawner = heroSpawner;
@@ -62,7 +62,7 @@ public class StageInitializer : IInitializable, IDisposable
         }
         
         CommanderView view = UnityEngine.Object.Instantiate(_commanderView, _stageConfig.CommanderPosition, Quaternion.identity);
-        _commanderPresenter = new CommanderPresenter(_commanderModel, view, _registry, _projectileManager);
+        _commanderPresenter = new CommanderPresenter(_commanderModel, view, _registry, _projectileSpawner);
         _commanderPresenter.Initialize();
         
         Debug.Log("지휘관 소환 완료");

@@ -33,7 +33,7 @@ public class InGameLifetimeScope : LifetimeScope
         builder.Register<GridModel>(Lifetime.Scoped);
         builder.Register<HeroSpawner>(Lifetime.Scoped);
         builder.Register<CoinModel>(Lifetime.Scoped).WithParameter(currentStageConfig.InitialCoin);
-        builder.Register<ProjectileManager>(Lifetime.Scoped);
+        builder.Register<ProjectileSpawner>(Lifetime.Scoped);
         builder.RegisterEntryPoint<WavePresenter>();
         builder.RegisterEntryPoint<EnemySpawner>().AsSelf();
         builder.RegisterEntryPoint<StageInitializer>();

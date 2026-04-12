@@ -10,19 +10,19 @@ public class HeroPresenter : IInitializable, IDisposable
     private readonly HeroModel _model;
     private readonly HeroView _view;
     private readonly EnemyRegistry _enemyRegistry;
-    private readonly ProjectileManager _projectileManager;
+    private readonly ProjectileSpawner _projectileSpawner;
     
     private CompositeDisposable _disposables = new CompositeDisposable();
     
     public HeroModel Model => _model;
     public HeroView View => _view;
     
-    public HeroPresenter(HeroModel model, HeroView view, EnemyRegistry enemyRegistry, ProjectileManager projectileManager)
+    public HeroPresenter(HeroModel model, HeroView view, EnemyRegistry enemyRegistry, ProjectileSpawner projectileSpawner)
     {
         _model = model;
         _view = view;
         _enemyRegistry = enemyRegistry;
-        _projectileManager = projectileManager;
+        _projectileSpawner = projectileSpawner;
         
         _view.SetGizmoRange(_model.Config.AttackRange);
     }
@@ -42,7 +42,7 @@ public class HeroPresenter : IInitializable, IDisposable
             // targetModel.TakeDamage(_model.CurrentAttackPower);
             if (_enemyRegistry.TryGetView(targetModel, out EnemyView targetView))
             {
-                _projectileManager.SpawnProjectile(
+                _projectileSpawner.SpawnProjectile(
                     _model.Config.ProjectilePrefab.GetComponent<ProjectileView>(), 
                     _view.transform.position, 
                     _model.CurrentAttackPower,
